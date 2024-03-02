@@ -1,7 +1,5 @@
-Feature: Zomato Customer Segment Offers
 
-  Background:
-    Given Zomato API services are available
+Feature: Zomato Customer Segment Offers
 
   Scenario: Apply FLAT amount off offer to segment p1
     Given a user with id "1" belongs to segment "p1"
@@ -9,11 +7,11 @@ Feature: Zomato Customer Segment Offers
     When the user applies the offer to a cart with value "200" for restaurant "1"
     Then the final cart value should be "190"
 
-  # Scenario: Apply FLAT percentage off offer to segment p1
-  #   Given a user with id "2" belongs to segment "p1"
-  #   And a FLATP offer with value "10%" is available for segment "p1" for restaurant "1"
-  #   When the user applies the offer to a cart with value "200" for restaurant "1"
-  #   Then the final cart value should be "180"
+  Scenario: Apply FLAT percentage off offer to segment p1
+    Given a user with id "2" belongs to segment "p1"
+    And a FLATP offer with value "10%" is available for segment "p1" for restaurant "1"
+    When the user applies the offer to a cart with value "200" for restaurant "1"
+    Then the final cart value should be "180"
 
   # Scenario: Apply FLAT amount off offer to segment p2
   #   Given a user with id "3" belongs to segment "p2"
