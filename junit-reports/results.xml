@@ -1,0 +1,6 @@
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="1.3501039999999997">
+<testsuite name="smoke-features\cart_offers.feature.spec.js" timestamp="2024-03-02T14:04:17.543Z" hostname="chromium" tests="1" failures="0" skipped="0" time="0.182" errors="0">
+<testcase name="Zomato Customer Segment Offers › Apply FLAT amount off offer to segment p1" classname="smoke-features\cart_offers.feature.spec.js" time="0.182">
+</testcase>
+</testsuite>
+</testsuites>
