@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Test Cases for Cart Offers",
   "scripts": {
-    "runTests": "npx bddgen && npx playwright test"
+    "runTests": "npx bddgen && npx playwright test",
+    "runTestsDebug": "npx bddgen && npx playwright test --headed --project=chromium"
   },
   "keywords": [],
   "author": "Deepankar Dey",

@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 class DataConstants {
-    static baseURL = "";
+    
+    static baseURL = "http://localhost:9001/api/v1";
     
 }
 

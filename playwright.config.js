@@ -58,7 +58,7 @@ module.exports = defineConfig({
    
     actionTimeout: 40 * 1000,
     navigationTimeout: 2 * 60 * 1000,
-    trace: "off",
+    trace: "retain-on-failure",
     screenshot: screenshotValue,
     video: videoValue
   },

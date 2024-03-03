@@ -1,74 +1,132 @@
 const { createBdd } = require('playwright-bdd');
-const { test, expect } = require('@playwright/test');
+const { expect } = require('@playwright/test');
 const { Given, When, Then } = createBdd();
 
 
-// Assuming 'requestContext' is somehow made available via integration setup
-// Assuming 'Given', 'When', 'Then' are imported from '@cucumber/cucumber'
-// and 'request' is somehow made available
 
+const baseUrl = "http://localhost:9001/api/v1";
 let response;
+let applyOfferResponse;
 
-Given('a user with id {string} belongs to segment {string}', async  () => {
-  // This step would typically set up the user's segment in your system.
-  // Assuming this setup is done elsewhere or this step acts as documentation.
+Given('a FLATX offer with value {string} is available for restaurant {string}', async ({request},value, restaurantId) => {
+  response = await request.post(`${baseUrl}/offer`, {
+    data: {
+      restaurant_id: parseInt(restaurantId, 10),
+      offer_type: "FLATX",
+      offer_value: parseInt(value, 10),
+      customer_segment: ["p1"]
+    },
+    headers: { 'Content-Type': 'application/json' }
+  });
+  await expect(response.status()).toBe(200);
 });
 
-Given('a FLATX offer with value {string} is available for segment {string} for restaurant {string}', async  ({request}) => { 
-  response = await request.post('http://localhost:9001/api/v1/offer', {
+When('the offer is applied to a cart with value {string} for restaurant {string}', async ({request},cartValue, restaurantId) => {
+  applyOfferResponse = await request.post(`${baseUrl}/cart/apply_offer`, {
     data: {
-      restaurant_id: 1,
+      cart_value: parseInt(cartValue, 10),
+      user_id: 1,
+      restaurant_id: parseInt(restaurantId, 10)
+    }
+  });
+});
+
+Then('the final cart value should be {string}', async ({request},expectedValue) => {
+  const responseBody = await applyOfferResponse.json();
+  expect(responseBody.cart_value).toBe(parseInt(expectedValue, 10));
+});
+
+Given('a FLATX offer is already applied to restaurant {string}', async ({request}, restaurantId) => {
+  response = await request.post(`${baseUrl}/offer`, {
+    data: {
+      restaurant_id: parseInt(restaurantId, 10),
       offer_type: "FLATX",
       offer_value: 10,
       customer_segment: ["p1"]
-    }
+    },
+    headers: { 'Content-Type': 'application/json' }
   });
-  const responseBody = await response.json();
-  expect(responseBody.response_msg).toBe('success');
+  await expect(response.status()).toBe(200);
 });
 
-When('the user applies the offer to a cart with value {string} for restaurant {string}', async  ({request}) => {
-  response = await request.post('http://localhost:9001/api/v1/cart/apply_offer', {
+When('an attempt is made to apply a FLATX% offer to a cart with value {string} for restaurant {string}', async ({request},cartValue, restaurantId) => {
+  applyOfferResponse = await request.post(`${baseUrl}/cart/apply_offer`, {
     data: {
-      cart_value: 200,
+      cart_value: parseInt(cartValue, 10),
       user_id: 1,
-      restaurant_id: 1
+      restaurant_id: parseInt(restaurantId, 10),
+      offer_type: "FLATX%"
     }
   });
 });
 
-Then('the final cart value should be {string}', async  ({request}) => {
-  const responseBody = await response.json();
-  expect(responseBody.cart_value).toBe(190);
+Then('the offer application should fail', async () => {
+  expect(applyOfferResponse.status()).not.toBe(200);
 });
 
-
-Given('a FLATP offer with value {string} is available for segment {string} for restaurant {string}', async  ({request}) => {
-  response = await request.post('http://localhost:9001/api/v1/offer', {
+Given('a FLATX% offer with value {string} is available for restaurant {string}', async ({request},value, restaurantId) => {
+  response = await request.post(`${baseUrl}/offer`, {
     data: {
-      restaurant_id: 1,
-      offer_type: "FLATP",
-      offer_value: "10%",
+      restaurant_id: parseInt(restaurantId, 10),
+      offer_type: "FLATX%",
+      offer_value: parseInt(value, 10),
       customer_segment: ["p1"]
-    }
-  
+    },
+    headers: { 'Content-Type': 'application/json' }
   });
-  const responseBody = await response.json();
-  console.log(responseBody);
-
+  await expect(response.status()).toBe(200);
 });
 
-// When('the user applies the offer to a cart with value {string} for restaurant {string}', async  ({request}) => {
-//   response = await request.post('http://localhost:9001/api/v1/cart/apply_offer', {
-//     data: {
-//       cart_value: 200,
-//       user_id: 2,
-//       restaurant_id: 1
-//     }
-//   });
-// });
+Given('no offer is available for restaurant {string}', async ({request}, restaurantId) => {
 
-// Then('the final cart value should be {string}', async  ({request}) => {
-//   const responseBody = await response.json();
-//   expect(responseBody.cart_value).toBe(180);
-// });
+  // no implementation needed for this step
+});
+
+When('any offer is applied to a cart with value {string} for restaurant {string}', async ({request},cartValue, restaurantId) => {
+  applyOfferResponse = await request.post(`${baseUrl}/cart/apply_offer`, {
+    data: {
+      cart_value: parseInt(cartValue, 10),
+      user_id: 1,
+      restaurant_id: parseInt(restaurantId, 10)
+    }
+  });
+});
+
+Then('the final cart value should remain {string}', async ({request},expectedValue) => {
+  const responseBody = await applyOfferResponse.json();
+  expect(responseBody.cart_value).toBe(parseInt(expectedValue, 10));
+});
+
+Given('an invalid offer type is provided for restaurant {string}', async ({request}, restaurantId) => {
+  response = await request.post(`${baseUrl}/offer`, {
+    data: {
+      restaurant_id: parseInt(restaurantId, 10),
+      offer_type: "FLATX%",
+      offer_value: 100,
+      customer_segment: ["p1"]
+    },
+    headers: { 'Content-Type': 'application/json' }
+  });
+  await expect(response.status()).toBe(200);
+});
+
+When('the invalid offer is applied to a cart with value {string} for restaurant {string}', async ({request},cartValue, restaurantId) => {
+  applyOfferResponse = await request.post(`${baseUrl}/cart/apply_offer`, {
+    data: {
+      cart_value: parseInt(cartValue, 10),
+      user_id: 1,
+      restaurant_id: parseInt(restaurantId, 10)
+    }
+  });
+});
+
+Then('the offer application should return {string} which is invalid offer', async ({request},expectedValue) => {
+  const responseBody = await applyOfferResponse.json();
+  expect(responseBody.cart_value).toBe(0);
+});
+
+
+Then('the final cart value should be {string} which is the original offer applied', async ({request},expectedValue) => {
+  const responseBody = await applyOfferResponse.json();
+  expect(responseBody.cart_value).toBe(parseInt(expectedValue, 10));
+});
