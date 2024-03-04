@@ -1,20 +1,20 @@
-<testsuites id="" name="" tests="8" failures="0" skipped="0" errors="0" time="1.7947690000000003">
-<testsuite name="smoke-features\cart_offers.feature.spec.js" timestamp="2024-03-03T17:43:36.076Z" hostname="chromium" tests="8" failures="0" skipped="0" time="2.102" errors="0">
-<testcase name="Zomato Customer Segment Offers › Apply FLATX amount off offer for restaurant 1" classname="smoke-features\cart_offers.feature.spec.js" time="0.467">
+<testsuites id="" name="" tests="8" failures="0" skipped="0" errors="0" time="3.802788">
+<testsuite name="smoke-features\cart_offers.feature.spec.js" timestamp="2024-03-04T09:00:41.193Z" hostname="chromium" tests="8" failures="0" skipped="0" time="3.215" errors="0">
+<testcase name="Zomato Customer Segment Offers › Apply FLATX amount off offer for restaurant 1" classname="smoke-features\cart_offers.feature.spec.js" time="0.549">
 </testcase>
-<testcase name="Zomato Customer Segment Offers › Attempt to apply FLATX% offer when FLATX is already applied to restaurant 1" classname="smoke-features\cart_offers.feature.spec.js" time="0.307">
+<testcase name="Zomato Customer Segment Offers › Attempt to apply FLATX% offer when FLATX is already applied to restaurant 1" classname="smoke-features\cart_offers.feature.spec.js" time="0.746">
 </testcase>
-<testcase name="Zomato Customer Segment Offers › Apply FLATX% percentage off offer for restaurant 2" classname="smoke-features\cart_offers.feature.spec.js" time="0.386">
+<testcase name="Zomato Customer Segment Offers › Apply FLATX% percentage off offer for restaurant 2" classname="smoke-features\cart_offers.feature.spec.js" time="0.241">
 </testcase>
-<testcase name="Zomato Customer Segment Offers › Offer not available for restaurant 100" classname="smoke-features\cart_offers.feature.spec.js" time="0.351">
+<testcase name="Zomato Customer Segment Offers › Offer not available for restaurant 100" classname="smoke-features\cart_offers.feature.spec.js" time="0.21">
 </testcase>
-<testcase name="Zomato Customer Segment Offers › User tries to apply an offer to a restaurant without any available offers" classname="smoke-features\cart_offers.feature.spec.js" time="0.128">
+<testcase name="Zomato Customer Segment Offers › User tries to apply an offer to a restaurant without any available offers" classname="smoke-features\cart_offers.feature.spec.js" time="0.328">
 </testcase>
-<testcase name="Zomato Customer Segment Offers › Applying an offer that results in a negative cart value" classname="smoke-features\cart_offers.feature.spec.js" time="0.152">
+<testcase name="Zomato Customer Segment Offers › Applying an offer that results in a negative cart value" classname="smoke-features\cart_offers.feature.spec.js" time="0.442">
 </testcase>
-<testcase name="Zomato Customer Segment Offers › Applying an offer to a cart with a value of &quot;0&quot;" classname="smoke-features\cart_offers.feature.spec.js" time="0.142">
+<testcase name="Zomato Customer Segment Offers › Applying an offer to a cart with a value of &quot;0&quot;" classname="smoke-features\cart_offers.feature.spec.js" time="0.47">
 </testcase>
-<testcase name="Zomato Customer Segment Offers › Invalid offer type provided" classname="smoke-features\cart_offers.feature.spec.js" time="0.169">
+<testcase name="Zomato Customer Segment Offers › Invalid offer type provided" classname="smoke-features\cart_offers.feature.spec.js" time="0.229">
 </testcase>
 </testsuite>
 </testsuites>

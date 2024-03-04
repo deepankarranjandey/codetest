@@ -9,9 +9,10 @@ test.describe("Zomato Customer Segment Offers", () => {
     await Then("the final cart value should be \"190\"", null, { request });
   });
 
-  test("Attempt to apply FLATX% offer when FLATX is already applied to restaurant 1", async ({ Given, request, When }) => {
+  test("Attempt to apply FLATX% offer when FLATX is already applied to restaurant 1", async ({ Given, request, When, Then }) => {
     await Given("a FLATX offer is already applied to restaurant \"1\"", null, { request });
     await When("an attempt is made to apply a FLATX% offer to a cart with value \"200\" for restaurant \"1\"", null, { request });
+    await Then("the final cart value should be \"190\"", null, { request });
   });
 
   test("Apply FLATX% percentage off offer for restaurant 2", async ({ Given, request, When, Then }) => {

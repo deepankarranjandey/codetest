@@ -8,7 +8,7 @@ Feature: Zomato Customer Segment Offers
   Scenario: Attempt to apply FLATX% offer when FLATX is already applied to restaurant 1
     Given a FLATX offer is already applied to restaurant "1"
     When an attempt is made to apply a FLATX% offer to a cart with value "200" for restaurant "1"
-    # Then the offer application should fail
+    Then the final cart value should be "190"
 
   Scenario: Apply FLATX% percentage off offer for restaurant 2
     Given a FLATX% offer with value "15%" is available for restaurant "2"
